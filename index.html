@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forehead-based temperature correction of postmortem FLAIR MRI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .formula {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        .input-box, .result-box {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+        .result-box {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Forehead-based temperature correction of postmortem FLAIR MRI</h1>
+
+    <div class="formula">
+        TI<sub>0</sub> = 895.8 ± 136.7 ms + (11.9 ± 9.2) ms·°C<sup>-1</sup>·T
+    </div>
+
+    <label for="temperature">Measured Forehead Temperature (°C):</label>
+    <input type="number" id="temperature" class="input-box" placeholder="Enter temperature">
+
+    <div>
+        <label>Corrected TI<sub>0</sub> (ms):</label>
+        <div id="result" class="result-box">Result will appear here</div>
+    </div>
+
+    <script>
+        const temperatureInput = document.getElementById('temperature');
+        const resultBox = document.getElementById('result');
+
+        temperatureInput.addEventListener('input', () => {
+            const T = parseFloat(temperatureInput.value);
+            if (!isNaN(T)) {
+                const TI0 = 895.8 + (11.9 * T);
+                resultBox.textContent = TI0.toFixed(2) + " ms";
+            } else {
+                resultBox.textContent = "Result will appear here";
+            }
+        });
+    </script>
+</body>
+</html>
